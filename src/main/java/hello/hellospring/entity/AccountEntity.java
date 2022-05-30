@@ -1,0 +1,50 @@
+package hello.hellospring.entity;
+
+import lombok.*;
+
+import javax.persistence.*;
+
+@Getter // getter 메소드 생성
+@Builder // 빌더를 사용할 수 있게 함
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name="account") // 테이블 명을 작성
+@Entity
+public class AccountEntity {
+    @Id
+    @Column(name="accountid", nullable = false, unique = true)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long accountId;
+
+    @Column(name="accountname", nullable = false, unique = true, length = 45)
+    private String accountName;
+
+    @Column(nullable = false)
+    private int balance;
+
+    @Column(name="accounttype", nullable = true)
+    private int accountType;
+
+    @Builder
+    public AccountEntity() {
+
+    }
+    public AccountEntity(long accountId, String accountName, int balance, int accountType) {
+        this.accountId = accountId;
+        this.accountName = accountName;
+        this.balance = balance;
+        this.accountType = accountType;
+    }
+
+    public int getBalance() {
+        return this.balance;
+    }
+
+    public int getAccountType() {
+        return this.accountType;
+    }
+
+    public String getAccountName() {
+        return this.accountName;
+    }
+}
