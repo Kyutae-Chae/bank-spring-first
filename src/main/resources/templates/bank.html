@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Bank Template page</title>
+</head>
+<body>
+<p th:text="'안녕하세요. ' + ${list.size} + '건'">안녕하세요</p>
+
+<ul th:each="item : ${list}">
+  <li th:text="${item.getAccountId} +', ' + ${item.getBalance} +', ' + ${item.getAccountName} +', ' + ${item.getAccountType}">account</li>
+</ul>
+</body>
+</html>

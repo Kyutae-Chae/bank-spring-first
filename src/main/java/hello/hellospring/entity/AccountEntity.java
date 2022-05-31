@@ -36,6 +36,7 @@ public class AccountEntity {
         this.accountType = accountType;
     }
 
+    public long getAccountId() {return this.accountId;}
     public int getBalance() {
         return this.balance;
     }
