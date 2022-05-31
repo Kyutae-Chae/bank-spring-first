@@ -13,8 +13,24 @@ import javax.persistence.*;
 public class AccountEntity {
     @Id
     @Column(name="accountid", nullable = false, unique = true)
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long accountId;
+
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
+    }
+
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
+    }
+
+    public void setAccountType(int accountType) {
+        this.accountType = accountType;
+    }
 
     @Column(name="accountname", nullable = false, unique = true, length = 45)
     private String accountName;
@@ -29,23 +45,17 @@ public class AccountEntity {
     public AccountEntity() {
 
     }
-    public AccountEntity(long accountId, String accountName, int balance, int accountType) {
-        this.accountId = accountId;
+    public AccountEntity(/*long accountId,*/ String accountName, int balance, int accountType) {
+//        this.accountId = accountId;
         this.accountName = accountName;
         this.balance = balance;
         this.accountType = accountType;
     }
 
-    public long getAccountId() {return this.accountId;}
-    public int getBalance() {
-        return this.balance;
-    }
+//    public long getAccountId() {return this.accountId;}
+    public int getBalance() {return this.balance;}
 
-    public int getAccountType() {
-        return this.accountType;
-    }
+    public int getAccountType() {return this.accountType;}
 
-    public String getAccountName() {
-        return this.accountName;
-    }
+    public String getAccountName() {return this.accountName;}
 }
