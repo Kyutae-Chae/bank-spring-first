@@ -54,41 +54,40 @@ public class BankController {
 
     //계좌 생성하기
     @PostMapping("account")
-    @ResponseBody
-    public Account accountCreate(Account account) {
+    public String accountCreate(Account account) {
         System.out.println("[LOG]"+"account name : "+account.getAccountName());
         accountRepository.save(new AccountEntity(account.getAccountId(), account.getAccountName(), account.getBalance(), account.getAccountType()));
-        return account;
+        return "redirect:/bank";
     }
 
     //accountId로 입금하기
     @PatchMapping("deposit/{accountId}")
-    @ResponseBody
-    public void deposit(@PathVariable("accountId") long accountId, @RequestParam int amount) {
+    public String deposit(@PathVariable("accountId") long accountId, @RequestParam int amount) {
         Optional<AccountEntity> account = accountRepository.findById(accountId);
         Account ac;
         if (account.isPresent()) {
             AccountEntity ae = account.get();
-            if (ae.getAccountType() == 1) return;
+            if (ae.getAccountType() == 2) return "redirect:/balance/" + accountId;
             ae.setBalance(ae.getBalance() + amount);
             accountRepository.save(ae);
         }
+        return "redirect:/balance/" + accountId;
     }
 
     //accountId로 출금하기
     @PatchMapping("withdraw/{accountId}")
-    @ResponseBody
-    public void withdraw(@PathVariable("accountId") long accountId, @RequestParam int amount) {
+    public String withdraw(@PathVariable("accountId") long accountId, @RequestParam int amount) {
         Optional<AccountEntity> account = accountRepository.findById(accountId);
         Account ac;
         if (account.isPresent()) {
             AccountEntity ae = account.get();
-            if (ae.getAccountType() == 1) return;
+            if (ae.getAccountType() == 2) return "redirect:/balance/" + accountId;;
             if (ae.getBalance() >= amount) {
                 ae.setBalance(ae.getBalance() - amount);
                 accountRepository.save(ae);
             }
         }
+        return "redirect:/balance/" + accountId;
     }
 
 
