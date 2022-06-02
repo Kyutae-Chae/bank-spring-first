@@ -5,7 +5,7 @@
   <title>Bank Template page</title>
 </head>
 <body>
-<p th:text="'안녕하세요. ' + ${list.size} + '건'">안녕하세요</p>
+<p th:text="'안녕하세요. 총' + ${list.size} + '건의 계좌정보입니다.'">안녕하세요</p>
 
 <ul th:each="item : ${list}">
   <li th:text="${item.getBalance} +', ' + ${item.getAccountName} +', ' + ${item.getAccountType}">account
