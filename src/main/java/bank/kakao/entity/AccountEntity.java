@@ -1,4 +1,4 @@
-package hello.hellospring.entity;
+package bank.kakao.entity;
 
 import lombok.*;
 

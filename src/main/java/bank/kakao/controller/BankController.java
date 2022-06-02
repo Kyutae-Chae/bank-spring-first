@@ -1,8 +1,8 @@
-package hello.hellospring.controller;
+package bank.kakao.controller;
 
-import hello.hellospring.entity.Account;
-import hello.hellospring.entity.AccountEntity;
-import hello.hellospring.repository.AccountRepository;
+import bank.kakao.domain.Account;
+import bank.kakao.entity.AccountEntity;
+import bank.kakao.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +23,6 @@ public class BankController {
             System.out.println("[LOG]"+/*e.getAccountId() + ", " +*/ e.getAccountName() + ", " + e.getBalance());
         }
         model.addAttribute("list", list);
-//        model.addAttribute("data", "hello world!!!");
         return "bank";
     }
 

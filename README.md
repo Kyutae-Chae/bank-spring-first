@@ -1,2 +1,2 @@
-# hello-spring
+# bank-spring
 spring test repository
