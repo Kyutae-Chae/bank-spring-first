@@ -3,13 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <title>Bank Template page</title>
+  <style>
+  ul {
+    background-color:#EEEEEE;
+  }
+  #create_account {
+    background-color:#AAAAAA;
+  }
+</style>
 </head>
 <body>
 <p th:text="'안녕하세요. 총' + ${list.size} + '건의 계좌정보입니다.'">안녕하세요</p>
 
 <ul th:each="item : ${list}">
-  <li th:text="${item.getBalance} +', ' + ${item.getAccountName} +', ' + ${item.getAccountType}">account
-  </li>
+  <li th:text="${item.getBalance} +', ' + ${item.getAccountName} +', ' + ${item.getAccountType}">account</li>
+  <a th:href="@{/balance/{accountId}(accountId=${item.getAccountId})}">상세보기</a>
 </ul>
+
+<div id="create_account">
+계좌생성하기<br>
+<form action="/account/" method="POST">
+  <p>이름 : <input type="text" name="accountName"></p>
+  <p>초기입금액 : <input type="text" name="balance"></p>
+  <p><input type="radio" name="accountType" value="1">보통예금, <input type="radio" name="accountType" value="1">정기예금</p>
+  <p><input type="submit"></p>
+</form>
+</div>
 </body>
 </html>

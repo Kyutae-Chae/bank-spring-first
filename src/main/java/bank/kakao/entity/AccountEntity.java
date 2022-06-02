@@ -45,14 +45,14 @@ public class AccountEntity {
     public AccountEntity() {
 
     }
-    public AccountEntity(/*long accountId,*/ String accountName, int balance, int accountType) {
-//        this.accountId = accountId;
+    public AccountEntity(long accountId, String accountName, int balance, int accountType) {
+        this.accountId = accountId;
         this.accountName = accountName;
         this.balance = balance;
         this.accountType = accountType;
     }
 
-//    public long getAccountId() {return this.accountId;}
+    public long getAccountId() {return this.accountId;}
     public int getBalance() {return this.balance;}
 
     public int getAccountType() {return this.accountType;}

@@ -27,6 +27,14 @@ public class BankController {
         return "bank";
     }
 
+    /* balance.html 에 특정 계좌의 잔액을 보여줍니다. */
+    @GetMapping("balance/{accountId}")
+    public String balance(Model model, @PathVariable("accountId") long accountId) {
+//        Optional<AccountEntity> account = accountRepository.findById(accountId);
+        model.addAttribute("item", accountRepository.findById(accountId).get());
+        return "balance";
+    }
+
     /* API들은 결과를 JSON으로 보내줍니다. */
 
     //전체 계좌 리스트
@@ -49,7 +57,7 @@ public class BankController {
     @ResponseBody
     public Account accountCreate(Account account) {
         System.out.println("[LOG]"+"account name : "+account.getAccountName());
-        accountRepository.save(new AccountEntity(account.getAccountName(), account.getBalance(), account.getAccountType()));
+        accountRepository.save(new AccountEntity(account.getAccountId(), account.getAccountName(), account.getBalance(), account.getAccountType()));
         return account;
     }
 
@@ -61,6 +69,7 @@ public class BankController {
         Account ac;
         if (account.isPresent()) {
             AccountEntity ae = account.get();
+            if (ae.getAccountType() == 1) return;
             ae.setBalance(ae.getBalance() + amount);
             accountRepository.save(ae);
         }
@@ -74,6 +83,7 @@ public class BankController {
         Account ac;
         if (account.isPresent()) {
             AccountEntity ae = account.get();
+            if (ae.getAccountType() == 1) return;
             if (ae.getBalance() >= amount) {
                 ae.setBalance(ae.getBalance() - amount);
                 accountRepository.save(ae);
