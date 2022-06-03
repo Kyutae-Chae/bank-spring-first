@@ -25,21 +25,18 @@ public class BankRestController {
 
     //전체 계좌 리스트
     @GetMapping("accounts")
-    @ResponseBody
     public List<AccountEntity> bankApi() {
         return accountRepository.findAll();
     }
 
     //accoundId로 balance 조회
     @GetMapping("balance")
-    @ResponseBody
     public Optional<AccountEntity> readBalance(@RequestParam("accountid") Long accountid) {
         logService.info("balance : " + accountRepository.findById(accountid).get().getBalance());
         return accountRepository.findById(accountid);
     }
 
     @GetMapping("log-test")
-    @ResponseBody
     public String log() {
         logService.log();
         return "console log-test";
