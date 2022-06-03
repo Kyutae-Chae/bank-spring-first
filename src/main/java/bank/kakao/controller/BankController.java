@@ -67,7 +67,12 @@ public class BankController {
         Account ac;
         if (account.isPresent()) {
             AccountEntity ae = account.get();
-            if (ae.getAccountType() == 2) return "redirect:/balance/" + accountId;;
+            if (ae.getAccountType() == 2) {
+//                return "redirect:/balance/" + accountId;
+                model.addAttribute("error", "정기예금 출금 불가");
+                model.addAttribute("accountId", accountId);
+                return "error";
+            }
             if (ae.getBalance() >= amount) {
                 ae.setBalance(ae.getBalance() - amount);
                 accountRepository.save(ae);

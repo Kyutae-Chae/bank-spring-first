@@ -12,7 +12,7 @@
 <body>
 <div class="error">
   <p th:text="|${error}|">에러가 발생했습니다.</p>
-  <p th:text="|출금가능 금액은 ${availableAmount}원 입니다.|">에러가 발생했습니다.</p>
+  <div th:if="${availableAmount != null}"><p th:text="|출금가능 금액은 ${availableAmount}원 입니다.|">에러가 발생했습니다.</p></div>
 </div>
 <a th:href="@{/balance/{accountId}(accountId=${accountId})}">돌아가기</a>
 </body>
