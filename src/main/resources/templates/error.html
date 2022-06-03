@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>에러 page</title>
+  <style>
+  div.error {
+    background-color:#FF0000;
+  }
+</style>
+</head>
+<body>
+<div class="error">
+  <p th:text="|${error}|">에러가 발생했습니다.</p>
+  <p th:text="|출금가능 금액은 ${availableAmount}원 입니다.|">에러가 발생했습니다.</p>
+</div>
+<a th:href="@{/balance/{accountId}(accountId=${accountId})}">돌아가기</a>
+</body>
+</html>

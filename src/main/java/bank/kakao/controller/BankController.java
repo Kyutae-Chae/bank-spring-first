@@ -62,7 +62,7 @@ public class BankController {
 
     //accountId로 출금하기
     @PatchMapping("withdraw/{accountId}")
-    public String withdraw(@PathVariable("accountId") long accountId, @RequestParam int amount) {
+    public String withdraw(@PathVariable("accountId") long accountId, @RequestParam int amount, Model model) {
         Optional<AccountEntity> account = accountRepository.findById(accountId);
         Account ac;
         if (account.isPresent()) {
@@ -71,6 +71,11 @@ public class BankController {
             if (ae.getBalance() >= amount) {
                 ae.setBalance(ae.getBalance() - amount);
                 accountRepository.save(ae);
+            } else {
+                model.addAttribute("error", "출금 가능 금액 초과");
+                model.addAttribute("accountId", accountId);
+                model.addAttribute("availableAmount", ae.getBalance());
+                return "error";
             }
         }
         return "redirect:/balance/" + accountId;
